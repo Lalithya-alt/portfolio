@@ -1,31 +1,35 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import Skills from "../components/Skills";
-import Projects from "../components/Projects";
-import Contact from "../components/Contact";
-import bgImg from "../assets/bg.jpg";
-
+import Navbar       from "../components/Navbar";
+import About        from "../components/About";
+import Education    from "../components/Education";
+import Skills       from "../components/Skills";
+import Projects     from "../components/Projects";
+import Certificates from "../components/Certificates";
+import Contact      from "../components/Contact";
+import bgImg        from "../assets/bg.jpg";
 
 export default function Home() {
   return (
-    <div
-      className="text-white min-h-screen"
-      style={{
-        backgroundImage: `url(${bgImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
-    >
+    <div className="relative text-white min-h-screen">
+
+      {/* Fixed background — always covers viewport while scrolling */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url(${bgImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+
       <Navbar />
-      
+
       <main>
-        <Hero />
         <About />
+        <Education />
         <Skills />
         <Projects />
+        <Certificates />
         <Contact />
       </main>
     </div>

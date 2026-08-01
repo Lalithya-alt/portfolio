@@ -1,7 +1,7 @@
 export default function Projects() {
   return (
-    <section id="projects">
-      <p>Projects</p>
+    <section id="projects" className="min-h-screen">
+      {/* Projects content coming soon */}
     </section>
   );
 }
