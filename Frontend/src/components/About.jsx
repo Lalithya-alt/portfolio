@@ -1,4 +1,4 @@
-import meImg from "../assets/me.jpeg";
+const meImg = "/assets/me.jpeg";
 
 export default function About() {
   return (

@@ -5,7 +5,6 @@ import Skills       from "../components/Skills";
 import Projects     from "../components/Projects";
 import Certificates from "../components/Certificates";
 import Contact      from "../components/Contact";
-import bgImg        from "../assets/bg.jpg";
 
 export default function Home() {
   return (
@@ -15,7 +14,7 @@ export default function Home() {
       <div
         className="fixed inset-0 -z-10"
         style={{
-          backgroundImage: `url(${bgImg})`,
+          backgroundImage: 'url("/assets/bg.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

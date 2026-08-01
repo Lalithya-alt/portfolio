@@ -1,5 +1,5 @@
-import universityLogo from "../assets/university-logo.png";
-import schoolLogo from "../assets/school-logo.png";
+const universityLogo = "/assets/university-logo.png";
+const schoolLogo = "/assets/school-logo.png";
 
 const educationData = [
   {
@@ -44,8 +44,8 @@ export default function Education() {
     >
       {/* Header */}
       <div className="text-center max-w-4xl mb-16">
-        <h1 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wide">
-          Educational Background
+        <h1 className="text-2xl md:text-4xl font-bold text-white">
+          &lt;Educational Background/&gt;
         </h1>
         <p className="mt-6 text-white/60 text-sm md:text-base leading-relaxed">
           I hold a Bachelor of Information and Communication Technology Honours
