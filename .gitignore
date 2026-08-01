@@ -1,0 +1,28 @@
+
+# Environment variables
+/backend/.env
+/Frontend/.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Build folders
+dist/
+build/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+#packege-lock json
+/backend/node_modules
+/backend/package-lock.json
+
+/Frontend/node_modules
+/Frontend/package-lock.json
