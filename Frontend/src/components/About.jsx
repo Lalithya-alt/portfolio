@@ -52,7 +52,7 @@ export default function About() {
 
           {/* Resume Button */}
           <a
-            href="YOUR_RESUME_LINK"
+            href="https://canva.link/cq6uncvpdt557qc"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2 rounded-md border-2 border-teal-400 bg-teal-400/20 text-white font-medium hover:bg-teal-400 transition duration-300"
@@ -91,7 +91,7 @@ export default function About() {
 
             {/* Instagram */}
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/lalithya_razi/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

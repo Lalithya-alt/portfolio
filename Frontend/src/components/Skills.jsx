@@ -33,16 +33,15 @@ const skillCategories = [
 
 function SkillCard({ title, icon, skills }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-teal-400/40">
-      <div className="mb-1.5 flex items-center gap-2">
-        <span className="text-base" aria-hidden="true">
+    <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-5 shadow-md backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+      <div className="mb-3 flex items-center gap-3">
+        <span className="text-2xl" aria-hidden="true">
           {icon}
         </span>
-        <h2 className="text-s font-semibold text-white">{title}</h2>
-        <br/>
+        <h2 className="text-base font-semibold text-white">{title}</h2>
       </div>
 
-      <p className="text-[15px] leading-7 text-white/80">{skills.join(" ,  ")};</p>
+      <p className="text-sm leading-7 text-white/80">{skills.join("  •  ")}</p>
     </div>
   );
 }
@@ -71,7 +70,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="relative min-h-screen flex items-center justify-center px-3 py-6 md:px-4">
+    <section id="skills" className="relative min-h-screen flex items-center justify-center px-6 py-16 md:px-10">
       {/* Background Image */}
       <img
         src="/assets/bg.jpg"
@@ -82,22 +81,22 @@ const Skills = () => {
       {/* Skills Container */}
       <div className="relative z-10 w-full max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-14">
           <h1 className="text-2xl md:text-4xl font-bold text-white">
             &lt;Technical Skills/&gt;
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[0.78fr_1.22fr] gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.78fr_1.22fr] gap-16 items-start">
           {/* Skills Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {skills.map((skill) => (
               <div
                 key={skill.name}
                 className="group flex flex-col items-center justify-center"
               >
                 {/* Skill Logo */}
-                <div className="w-12 h-12 mb-1.5 flex items-center justify-center">
+                <div className="w-16 h-16 mb-3 flex items-center justify-center">
                   {skill.logo ? (
                     <img
                       src={skill.logo}
@@ -105,31 +104,31 @@ const Skills = () => {
                       className="w-full h-full object-contain"
                     />
                   ) : (
-                    <div className="w-full h-full rounded-full border border-white/30 bg-white/10 text-white font-bold text-xs flex items-center justify-center">
+                    <div className="w-full h-full rounded-full border border-white/30 bg-white/10 text-white font-bold text-sm flex items-center justify-center">
                       {skill.name.slice(0, 2).toUpperCase()}
                     </div>
                   )}
                 </div>
 
                 {/* Skill Name */}
-                <p className="text-white font-semibold text-xs text-center">
+                <p className="text-white font-semibold text-sm text-center">
                   {skill.name}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-8">
             {/* Description */}
             <div className="flex items-center">
               <p className="text-white/70 text-sm md:text-base leading-relaxed text-left">
-                I specialize in building modern web applications using the MERN stack
-                (MongoDB, Express.js, React, Node.js) with expertise in both
-                front-end and back-end development.
+              A selection of the technologies, programming languages, frameworks, databases, and development tools
+              I have worked with through academic projects, coursework, and practical software development experience.
+
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
               {skillCategories.map((category) => (
                 <SkillCard key={category.title} {...category} />
               ))}

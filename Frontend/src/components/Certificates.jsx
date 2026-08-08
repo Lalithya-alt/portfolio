@@ -5,31 +5,31 @@ const certificatesData = [
     id: 1,
     title: "Web Design for Beginners",
     issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa",
-    image: "/assets/bg.jpg",
+    image: "/assets/Certificates/Web_design_for_beginners.png",
   },
   {
     id: 2,
     title: "Python for Beginners",
     issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa",
-    image: "/assets/bg.jpg",
+    image: "/assets/Certificates/Python_fro_beginners.png",
   },
   {
     id: 3,
-    title: "Cloud Computing for Absolute Beginners",
-    issuer: "CodeKu DevOps Academy",
-    image: "/assets/bg.jpg",
+    title: "AI/ML Engineer - Stage 01",
+    issuer: "Centre for Open and Distance Education, Faculty of computing, SLIIT",
+    image: "/assets/Certificates/AI_ML_Course.png",
   },
   {
     id: 4,
-    title: "Version Controlling 101: From Zero to Hero",
-    issuer: "CodeKu DevOps Academy",
-    image: "/assets/bg.jpg",
+    title: "HackTrail 2.0 - overnight hackathon",
+    issuer: " ICT Students' Circle - University of Ruhuna.",
+    image: "/assets/Certificates/Hackothon_2.0.jpeg",
   },
   {
     id: 5,
-    title: "Introduction to Containerization",
-    issuer: "CodeKu DevOps Academy",
-    image: "/assets/bg.jpg",
+    title: "Full Stack Web Development(MERN)",
+    issuer: "SKYREK(PVT) Ltd",
+    image: "/assets/Certificates/MERN.png",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function Certificates() {
           &lt;Certifications & Courses/&gt;
         </h1>
         <p className="mt-4 text-white/60 text-sm md:text-base leading-relaxed">
-          These are the certifications and courses I have completed to enhance my skills in various areas of IT, software development, and other fields of interest. Each course has played a key role in building my expertise for the projects I undertake.
+              These are the certifications and courses I have completed to strengthen my knowledge and skills in software development, IT, and related technologies. They reflect my continuous learning and practical growth throughout my academic and professional journey.
         </p>
       </div>
 

@@ -30,7 +30,7 @@ const educationData = [
     title: "GCE Ordinary Level",
     details: [
       "6A & 3B's Passes",
-      "Index No: XXXXXXX",
+      "District: NuwaraEliya",
       "Sri Sumanagala National College",
     ],
   },
@@ -48,11 +48,9 @@ export default function Education() {
           &lt;Educational Background/&gt;
         </h1>
         <p className="mt-6 text-white/60 text-sm md:text-base leading-relaxed">
-          I hold a Bachelor of Information and Communication Technology Honours
-          Degree from the University of Ruhuna, building a strong foundation in
-          software engineering, information technology, and modern computing
-          concepts. My academic journey has helped me develop problem-solving
-          skills and a passion for creating technology-driven solutions.
+         I am undergraduate student following a Bachelor of Information and Communication Technology Honours Degree at the University of Ruhuna. 
+         My studies have provided me with a strong foundation in software development, information technology, databases, and modern computing concepts, 
+         while strengthening my problem-solving and practical development skills.
         </p>
       </div>
 
