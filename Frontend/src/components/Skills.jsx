@@ -46,15 +46,17 @@ function SkillCard({ title, icon, skills }) {
   );
 }
 
-const htmlLogo = "/assets/html.png";
-const cssLogo = "/assets/css.png";
-const jsLogo = "/assets/javascript.png";
-const reactLogo = "/assets/react.png";
-const nodeLogo = "/assets/node.png";
-const mongoLogo = "/assets/mongo.png";
-const gitLogo = null;
-const githubLogo = null;
-const tailwindLogo = null;
+const htmlLogo = "/assets/Tools/html.png";
+const cssLogo = "/assets/Tools/css.png";
+const jsLogo = "/assets/Tools/javascript.png";
+const reactLogo = "/assets/Tools/react.png";
+const nodeLogo = "/assets/Tools/node.png";
+const mongoLogo = "/assets/Tools/mongo.png";
+const mysqlLogo = "/assets/Tools/mysql.png";
+const githubLogo = "/assets/Tools/github.png";
+const tailwindLogo = "/assets/Tools/tailwind.png";
+const springbootLogo = "/assets/Tools/springboot.png";
+const javaLogo = "/assets/Tools/java.png";
 
 const Skills = () => {
   const skills = [
@@ -64,9 +66,13 @@ const Skills = () => {
     { name: "React", logo: reactLogo },
     { name: "Node.js", logo: nodeLogo },
     { name: "MongoDB", logo: mongoLogo },
-    { name: "Git", logo: gitLogo },
+     { name: "MySQL", logo: mysqlLogo },
     { name: "GitHub", logo: githubLogo },
     { name: "Tailwind CSS", logo: tailwindLogo },
+    { name: "Spring Boot", logo: springbootLogo },
+    { name: "Java", logo: javaLogo },
+   
+  
   ];
 
   return (
