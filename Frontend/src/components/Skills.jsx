@@ -83,8 +83,8 @@ const Skills = () => {
       <div className="relative z-10 w-full max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wide">
-            Technical Skills
+          <h1 className="text-2xl md:text-4xl font-bold text-white">
+            &lt;Technical Skills/&gt;
           </h1>
         </div>
 

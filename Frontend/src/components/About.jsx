@@ -65,7 +65,7 @@ export default function About() {
 
             {/* GitHub */}
             <a
-              href="https://github.com/"
+              href="https://github.com/Lalithya-alt"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -78,7 +78,7 @@ export default function About() {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/lalithya-rasingolla-039b62292/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
