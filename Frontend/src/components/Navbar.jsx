@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { id: "about",        label: "About" },
-  { id: "education",    label: "Education" },
-  { id: "skills",       label: "Skills" },
-  { id: "projects",     label: "Projects" },
-  { id: "certificates", label: "Certificates" },
-  { id: "contact",      label: "Contact" },
+  { id: "home",            label: "Home" },
+  { id: "about",           label: "About" },
+  { id: "education",       label: "Education" },
+  { id: "skills",          label: "Skills" },
+  { id: "projects",        label: "Projects" },
+  { id: "certificates",    label: "Certificates" },
+  { id: "extracurricular", label: "Activities" },
+  { id: "contact",         label: "Contact" },
 ];
+
 
 export default function Navbar() {
   const [menuOpen,     setMenuOpen]     = useState(false);

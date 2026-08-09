@@ -1,10 +1,12 @@
-import Navbar       from "../components/Navbar";
-import About        from "../components/About";
-import Education    from "../components/Education";
-import Skills       from "../components/Skills";
-import Projects     from "../components/Projects";
-import Certificates from "../components/Certificates";
-import Contact      from "../components/Contact";
+import Navbar          from "../components/Navbar";
+import HomeSection     from "../components/HomeSection";
+import About           from "../components/About";
+import Education       from "../components/Education";
+import Skills          from "../components/Skills";
+import Projects        from "../components/Projects";
+import Certificates    from "../components/Certificates";
+import Extracurricular from "../components/Extracurricular";
+import Contact         from "../components/Contact";
 
 export default function Home() {
   return (
@@ -24,11 +26,13 @@ export default function Home() {
       <Navbar />
 
       <main>
+        <HomeSection />
         <About />
         <Education />
         <Skills />
         <Projects />
         <Certificates />
+        <Extracurricular />
         <Contact />
       </main>
     </div>
