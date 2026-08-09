@@ -1,3 +1,4 @@
+import React from "react";
 
 const skillCategories = [
   {
@@ -66,13 +67,11 @@ const Skills = () => {
     { name: "React", logo: reactLogo },
     { name: "Node.js", logo: nodeLogo },
     { name: "MongoDB", logo: mongoLogo },
-     { name: "MySQL", logo: mysqlLogo },
-    { name: "GitHub", logo: githubLogo },
-    { name: "Tailwind CSS", logo: tailwindLogo },
+    { name: "MySQL", logo: mysqlLogo },
+    { name: "GitHub", logo: githubLogo, blendMode: true },
+    { name: "Tailwind CSS", logo: tailwindLogo, blendMode: true },
     { name: "Spring Boot", logo: springbootLogo },
     { name: "Java", logo: javaLogo },
-   
-  
   ];
 
   return (
@@ -108,6 +107,7 @@ const Skills = () => {
                       src={skill.logo}
                       alt={skill.name}
                       className="w-full h-full object-contain"
+                      style={skill.blendMode ? { mixBlendMode: "screen" } : {}}
                     />
                   ) : (
                     <div className="w-full h-full rounded-full border border-white/30 bg-white/10 text-white font-bold text-sm flex items-center justify-center">
