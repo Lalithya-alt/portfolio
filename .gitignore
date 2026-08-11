@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Build folders
+dist/
+build/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+#packege-lock json
+/node_modules
+/package-lock.json
+
+# Environment variables — NEVER commit these
+.env
+**/.env
+
+# Backend dependencies
+Backend/node_modules
+Backend/package-lock.json
