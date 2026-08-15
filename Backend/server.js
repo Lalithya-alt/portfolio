@@ -16,6 +16,7 @@ app.use(
     origin: [
       "http://localhost:5173", // Vite default dev port
       "http://localhost:4173", // Vite preview port
+      "https://portfolio-lalithya.vercel.app"
     ],
     methods: ["GET", "POST"],
   })
