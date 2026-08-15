@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { sendMessage } from "../services/api";
+import { sendMessage, pingBackend } from "../services/api";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ export default function Contact() {
 
   const [status, setStatus] = useState({
     submitting: false,
+    warming: false,   // true while waiting for Render cold-start wake-up
     success: false,
     error: "",
   });
@@ -22,20 +23,44 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ submitting: true, success: false, error: "" });
+    setStatus({ submitting: true, warming: false, success: false, error: "" });
 
     try {
+      // ── Step 1: Wake up the Render backend if it's sleeping ──────────────
+      setStatus((s) => ({ ...s, warming: true }));
+      await pingBackend(); // fire-and-forget warm-up ping (ignores failure)
+      setStatus((s) => ({ ...s, warming: false }));
+
+      // ── Step 2: Send the actual contact email ─────────────────────────────
       await sendMessage(formData);
-      setStatus({ submitting: false, success: true, error: "" });
+
+      setStatus({ submitting: false, warming: false, success: true, error: "" });
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
-      console.error(err);
-      const errorMsg =
-        err.response?.data?.message ||
-        "Something went wrong. Please try again later.";
-      setStatus({ submitting: false, success: false, error: errorMsg });
+      console.error("[Contact] Submit error:", err);
+
+      let errorMsg = "Something went wrong. Please try again later.";
+
+      if (err.code === "ECONNABORTED" || err.message?.includes("timeout")) {
+        errorMsg =
+          "The server is taking too long to respond. Please wait a moment and try again.";
+      } else if (err.response?.data?.message) {
+        errorMsg = err.response.data.message;
+      } else if (!err.response) {
+        errorMsg =
+          "Unable to reach the server. Please check your connection and try again.";
+      }
+
+      setStatus({ submitting: false, warming: false, success: false, error: errorMsg });
     }
   };
+
+  const isSubmitting = status.submitting;
+  const buttonLabel = status.warming
+    ? "Connecting to server…"
+    : status.submitting
+    ? "Sending Message…"
+    : "Send Message";
 
   return (
     <section
@@ -51,9 +76,8 @@ export default function Contact() {
           I am currently open to internship and part-time software engineering opportunities.
           Feel free to reach out for collaborations or questions!
 
-          Have a project idea, opportunity, or inquiry? Feel free to contact me directly using the 
+          Have a project idea, opportunity, or inquiry? Feel free to contact me directly using the
           information below or by filling out the form.
-
         </p>
       </div>
 
@@ -67,6 +91,7 @@ export default function Contact() {
               Send Me A Message
             </h2>
 
+            {/* ── Success Banner ── */}
             {status.success && (
               <div className="mb-6 p-4 rounded-xl bg-teal-400/20 border border-teal-400 text-teal-300 text-sm flex items-center gap-3">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -76,6 +101,7 @@ export default function Contact() {
               </div>
             )}
 
+            {/* ── Error Banner ── */}
             {status.error && (
               <div className="mb-6 p-4 rounded-xl bg-red-500/20 border border-red-500/60 text-red-300 text-sm flex items-center gap-3">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -153,11 +179,16 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={status.submitting}
-                className="w-full bg-teal-400 hover:bg-teal-300 text-black font-bold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-teal-400/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                disabled={isSubmitting}
+                className="w-full bg-teal-400 hover:bg-teal-300 text-black font-bold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-teal-400/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status.submitting ? (
-                  <span>Sending Message...</span>
+                {isSubmitting ? (
+                  <>
+                    <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span>{buttonLabel}</span>
+                  </>
                 ) : (
                   <>
                     <span>Send Message</span>
