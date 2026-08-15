@@ -1,205 +1,149 @@
-import React, { useState } from "react";
-import { sendMessage, pingBackend } from "../services/api";
+import React from "react";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaLinkedinIn,
+  FaGithub,
+  FaFacebookF,
+} from "react-icons/fa";
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+/* ─────────────────────────── helpers ─────────────────────────── */
 
-  const [status, setStatus] = useState({
-    submitting: false,
-    warming: false,   // true while waiting for Render cold-start wake-up
-    success: false,
-    error: "",
-  });
+const SOCIAL_LINKS = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/your-profile",
+    Icon: FaLinkedinIn,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/your-profile",
+    Icon: FaGithub,
+  },
+  {
+    label: "Facebook",
+    href: "https://facebook.com/your-profile",
+    Icon: FaFacebookF,
+  },
+];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+const CONTACT_ITEMS = [
+  {
+    Icon: FaMapMarkerAlt,
+    title: "Location",
+    detail: "Matara, Sri Lanka",
+  },
+  {
+    Icon: FaEnvelope,
+    title: "Email Address",
+    detail: "lalithyarasingolla@gmail.com",
+  },
+];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ submitting: true, warming: false, success: false, error: "" });
+/* ─────────────────────────── sub-components ──────────────────── */
 
-    try {
-      // ── Step 1: Wake up the Render backend if it's sleeping ──────────────
-      setStatus((s) => ({ ...s, warming: true }));
-      await pingBackend(); // fire-and-forget warm-up ping (ignores failure)
-      setStatus((s) => ({ ...s, warming: false }));
+function ContactInfoItem({ Icon, title, detail }) {
+  return (
+    <div className="group flex items-start gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-md transition duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+      {/* Icon bubble */}
+      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-teal-400/10 group-hover:border-teal-400/50 transition duration-300">
+        <Icon size={19} className="text-teal-400" />
+      </div>
 
-      // ── Step 2: Send the actual contact email ─────────────────────────────
-      await sendMessage(formData);
+      {/* Text */}
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-teal-400 mb-0.5">
+          {title}
+        </p>
+        <p className="text-sm text-white/70 leading-relaxed break-all">
+          {detail}
+        </p>
+      </div>
+    </div>
+  );
+}
 
-      setStatus({ submitting: false, warming: false, success: true, error: "" });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (err) {
-      console.error("[Contact] Submit error:", err);
+function SocialButton({ href, label, Icon }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:text-teal-400 hover:border-teal-400 hover:scale-110 transition duration-300"
+    >
+      <Icon size={16} />
+    </a>
+  );
+}
 
-      let errorMsg = "Something went wrong. Please try again later.";
+/* ─────────────────────────── main component ──────────────────── */
 
-      if (err.code === "ECONNABORTED" || err.message?.includes("timeout")) {
-        errorMsg =
-          "The server is taking too long to respond. Please wait a moment and try again.";
-      } else if (err.response?.data?.message) {
-        errorMsg = err.response.data.message;
-      } else if (!err.response) {
-        errorMsg =
-          "Unable to reach the server. Please check your connection and try again.";
-      }
-
-      setStatus({ submitting: false, warming: false, success: false, error: errorMsg });
-    }
-  };
-
-  const isSubmitting = status.submitting;
-  const buttonLabel = status.warming
-    ? "Connecting to server…"
-    : status.submitting
-    ? "Sending Message…"
-    : "Send Message";
-
+export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="px-6 py-16 flex flex-col items-center scroll-mt-20"
+      className="relative min-h-screen flex items-center px-6 py-16 md:px-10 scroll-mt-20"
     >
-      {/* Header */}
-      <div className="text-center max-w-4xl mb-14">
-        <h1 className="text-2xl md:text-4xl font-bold text-white">
-          &lt;Contact Me/&gt;
-        </h1>
-        <p className="mt-4 text-white/60 text-sm md:text-base leading-relaxed">
-          I am currently open to internship and part-time software engineering opportunities.
-          Feel free to reach out for collaborations or questions!
+      {/* Background image — matches Skills/HomeSection pattern */}
+      <img
+        src="/assets/bg.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-20 pointer-events-none"
+      />
 
-          Have a project idea, opportunity, or inquiry? Feel free to contact me directly using the
-          information below or by filling out the form.
-        </p>
-      </div>
+      <div className="relative z-10 w-full max-w-6xl mx-auto">
 
-      {/* Contact Form Container (Centered) */}
-      <div className="flex justify-center w-full max-w-6xl">
+        {/* Section Header */}
+        <div className="text-center mb-14">
+          <h1 className="text-2xl md:text-4xl font-bold text-white">
+            &lt;Contact Me/&gt;
+          </h1>
+          <p className="mt-4 text-white/60 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+            Have a project idea, opportunity, or inquiry? Feel free to reach
+            out — I'd love to hear from you!
+          </p>
+        </div>
 
-        {/* Contact Form */}
-        <div className="w-full lg:w-7/12">
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-xl font-bold text-teal-400 mb-6">
-              Send Me A Message
-            </h2>
+        {/* Contact Info + Hire Me */}
+        <div className="flex flex-col items-center gap-6 max-w-lg mx-auto">
 
-            {/* ── Success Banner ── */}
-            {status.success && (
-              <div className="mb-6 p-4 rounded-xl bg-teal-400/20 border border-teal-400 text-teal-300 text-sm flex items-center gap-3">
-                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Thank you! Your message has been sent successfully.
-              </div>
-            )}
-
-            {/* ── Error Banner ── */}
-            {status.error && (
-              <div className="mb-6 p-4 rounded-xl bg-red-500/20 border border-red-500/60 text-red-300 text-sm flex items-center gap-3">
-                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {status.error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name & Email Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Lalithya Rasingolla"
-                    className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                    Your Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="example@mail.com"
-                    className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition"
-                  />
-                </div>
-              </div>
-
-              {/* Subject */}
-              <div>
-                <label className="block text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Project Opportunity / Collaboration"
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition"
-                />
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                  Your Message *
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  placeholder="Hello Lalithya, I'd like to discuss..."
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition resize-none"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-teal-400 hover:bg-teal-300 text-black font-bold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-teal-400/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    <span>{buttonLabel}</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Send Message</span>
-                    <svg className="w-4 h-4 fill-none stroke-current" strokeWidth={2.2} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </>
-                )}
-              </button>
-            </form>
+          {/* Contact Info Items */}
+          <div className="flex flex-col gap-4 w-full">
+            {CONTACT_ITEMS.map(({ Icon, title, detail }) => (
+              <ContactInfoItem
+                key={title}
+                Icon={Icon}
+                title={title}
+                detail={detail}
+              />
+            ))}
           </div>
+
+          {/* Hire Me Card */}
+          <div className="w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-5 py-5 shadow-md transition duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-3">
+              <span aria-hidden="true">🚀</span>
+              Hire Me For Your Project
+            </h3>
+
+            <p className="text-sm text-white/70 leading-relaxed mb-5">
+              I’m available for software development projects and collaborations. 
+              Let’s discuss how I can contribute to your project.
+            </p>
+
+            {/* Divider */}
+            <div className="h-px bg-white/10 mb-5" />
+
+            {/* Social Icons */}
+            <div className="flex items-center justify-center gap-3">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <SocialButton key={label} href={href} label={label} Icon={Icon} />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
