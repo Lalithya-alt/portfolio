@@ -92,9 +92,9 @@ export default function HomeSection() {
               />
 
               {/* Profile photo */}
-              <div className="absolute inset-10 rounded-full overflow-hidden border-2 border-teal-400/40 shadow-2xl shadow-teal-400/10">
+              <div className="absolute inset-5 rounded-full overflow-hidden border-2 border-teal-400/40 shadow-2xl shadow-teal-400/10">
                 <img
-                  src="/assets/myphoto.png"
+                  src="/assets/me.jpeg"
                   alt="Lalithya Rasingolla — Full Stack Developer"
                   className="w-full h-full object-cover object-top"
                   loading="eager"
@@ -103,7 +103,7 @@ export default function HomeSection() {
 
               {/* Floating badge — Available */}
               <div
-                className="absolute bottom-10 -left-4 lg:-left-10 flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-3 py-2 shadow-xl"
+                className="absolute bottom-14 -left-6 lg:-left-8 flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-3 py-2 shadow-xl"
                 aria-label="Currently available for opportunities"
               >
                 <span className="relative flex h-2.5 w-2.5">

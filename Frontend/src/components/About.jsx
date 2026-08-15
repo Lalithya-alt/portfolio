@@ -1,4 +1,4 @@
-const meImg = "/assets/me.jpeg";
+const meImg = "/assets/my.jpeg";
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
           <img
             src={meImg}
             alt="Lalithya Rasingolla"
-            className="w-52 h-52 md:w-80 md:h-80 rounded-full border-2 border-dashed border-teal-400 p-3 object-cover object-top"
+            className="w-52 h-52 md:w-80 md:h-80 rounded-full border-2 border-dashed border-teal-400 p-3 object-cover object-center"
           />
           <div className="text-center">
             <p className="text-white text-lg md:text-xl font-semibold">
@@ -34,9 +34,6 @@ export default function About() {
             Hi there 👋, I’m Lalithya Rasingolla, an Information and Communication 
             Technology undergraduate at the University of Ruhuna with a 
             passion for building practical software solutions through technology. 
-            I specialize in MERN stack development, creating responsive user 
-            interfaces, scalable backend systems, and user-friendly digital 
-            experiences.
 
             <br /><br />
            I enjoy transforming ideas into practical applications by combining creativity, 
