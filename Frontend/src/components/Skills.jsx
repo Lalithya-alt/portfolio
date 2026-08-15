@@ -4,20 +4,18 @@ const skillCategories = [
   {
     title: "Programming Languages",
     icon: "💻",
-    skills: ["HTML", "CSS", "JavaScript", "PHP", "C", "Java", "MySQL"],
+    skills: ["HTML", "CSS", "JavaScript", "PHP", "C", "Java", "MySQL" , "mongoDB" , "Express.js" , "NodeJs" , "React"],
   },
   {
     title: "Development Tools",
     icon: "🛠️",
     skills: [
-      "Git",
       "GitHub",
       "IntelliJ IDEA",
       "VS Code",
-      "Spring Boot",
-      "Java Swing",
       "Packet Tracer",
       "Canva",
+      "MySQL Workbench"
     ],
   },
   {

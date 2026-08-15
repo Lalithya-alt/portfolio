@@ -20,7 +20,7 @@ const activitiesData = [
 
 function ActivityCard({ activity }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-3 shadow-lg flex flex-col transition duration-500 hover:-translate-y-2 hover:border-teal-400 hover:shadow-teal-400/20">
+    <div className="h-full bg-white border border-gray-200 rounded-2xl p-3 shadow-lg flex flex-col transition duration-500 hover:-translate-y-2 hover:border-teal-400 hover:shadow-teal-400/20">
       {/* Image with inner padding from border */}
       <div className="w-full h-52 overflow-hidden rounded-xl">
         <img
@@ -69,9 +69,9 @@ export default function Extracurricular() {
       </div>
 
       {/* Cards — centered, fixed width per card so 2 cards sit in the middle */}
-      <div className="flex flex-wrap justify-center gap-8 w-full max-w-6xl">
+      <div className="flex flex-wrap justify-center items-stretch gap-8 w-full max-w-6xl">
         {activitiesData.map((activity) => (
-          <div key={activity.id} className="w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] max-w-sm">
+          <div key={activity.id} className="flex w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] max-w-sm">
             <ActivityCard activity={activity} />
           </div>
         ))}
