@@ -3,26 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-/**
- * Validates that a string is a well-formed email address.
- * Simple RFC-compliant check — no external libraries required.
- */
 const isValidEmail = (email) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
 
-/**
- * POST /api/contact
- *
- * Accepts: { name, email, subject, message }
- * Validates all required fields and the email format.
- * Sends a formatted HTML email to RECEIVER_EMAIL via Nodemailer.
- * Sets the visitor's email as the Reply-To address.
- *
- * Responses:
- *   200  — Email sent successfully
- *   400  — Validation error (bad/missing input)
- *   500  — SMTP / server error (no sensitive details exposed)
- */
 export const sendContactEmail = async (req, res) => {
   const { name, email, subject, message } = req.body;
 
