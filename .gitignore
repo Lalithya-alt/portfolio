@@ -16,8 +16,8 @@ Thumbs.db
 .idea/
 
 #packege-lock json
-/node_modules
-/package-lock.json
+Frontend/node_modules
+Frontend/package-lock.json
 
 # Environment variables — NEVER commit these
 .env
@@ -25,4 +25,4 @@ Thumbs.db
 
 # Backend dependencies
 Backend/node_modules
-Backend/package-lock.json
+Backend/package-lock.json
