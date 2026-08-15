@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 const projectsData = [
   {
@@ -63,6 +63,162 @@ const projectsData = [
   },
 ];
 
+function ProjectCard({ project }) {
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between shadow-lg transition duration-500 hover:-translate-y-2 hover:border-teal-400 hover:shadow-teal-400/20 h-full">
+      <div>
+        {/* Image */}
+        <div className="w-full h-48 rounded-xl overflow-hidden mb-5 border border-gray-200">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+        </div>
+
+        {/* Title */}
+        <h2 className="text-xl font-bold text-navy-800 mb-3 text-center" style={{ color: '#0a1a4e' }}>
+          {project.title}
+        </h2>
+
+        {/* Description */}
+        <p className="text-sm leading-relaxed mb-4 text-justify" style={{ color: '#1e3a8a' }}>
+          {project.description}
+        </p>
+
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.technologies.map((tech, idx) => (
+            <span
+              key={idx}
+              className="px-2.5 py-1 text-xs rounded-md font-mono"
+              style={{ background: '#e8f0fe', border: '1px solid #93c5fd', color: '#1e3a8a' }}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Action Buttons: GitHub & LinkedIn */}
+      <div className="flex gap-3 pt-4 border-t border-gray-200">
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold transition duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white"
+          style={{ borderColor: '#1e3a8a', color: '#1e3a8a', background: 'transparent' }}
+        >
+          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          GitHub
+        </a>
+
+        <a
+          href={project.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold transition duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white"
+          style={{ borderColor: '#1d4ed8', background: '#dbeafe', color: '#1e3a8a' }}
+        >
+          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 012.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ── Mobile/Tablet Paginated Carousel ── */
+function ProjectsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const total = projectsData.length;
+
+  const goTo = (index) => {
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    setCurrentIndex(index);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(currentIndex + 1);
+      else goTo(currentIndex - 1);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-sm mx-auto">
+      {/* Card Wrapper */}
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="select-none"
+      >
+        <ProjectCard project={projectsData[currentIndex]} />
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-4 mt-6">
+        {/* Prev */}
+        <button
+          onClick={() => goTo(currentIndex - 1)}
+          className="w-9 h-9 flex items-center justify-center rounded-full border border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white transition-all duration-300"
+          aria-label="Previous project"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Dots */}
+        <div className="flex items-center gap-2">
+          {projectsData.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goTo(idx)}
+              className={`rounded-full transition-all duration-300 ${
+                idx === currentIndex
+                  ? "w-5 h-2.5 bg-teal-400"
+                  : "w-2.5 h-2.5 bg-white/30 hover:bg-white/60"
+              }`}
+              aria-label={`Go to project ${idx + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Next */}
+        <button
+          onClick={() => goTo(currentIndex + 1)}
+          className="w-9 h-9 flex items-center justify-center rounded-full border border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white transition-all duration-300"
+          aria-label="Next project"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Counter */}
+      <p className="text-center text-white/50 text-xs mt-3">
+        {currentIndex + 1} / {total}
+      </p>
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section
@@ -80,76 +236,15 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Projects Grid: 2 Rows x 3 Columns on Large Screens */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+      {/* Mobile & Tablet: Paginated Carousel (hidden on lg+) */}
+      <div className="lg:hidden w-full flex justify-center">
+        <ProjectsCarousel />
+      </div>
+
+      {/* Desktop: Full 3-column Grid (hidden below lg) */}
+      <div className="hidden lg:grid grid-cols-3 gap-8 w-full max-w-6xl">
         {projectsData.map((project) => (
-          <div
-            key={project.id}
-            className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between shadow-lg transition duration-500 hover:-translate-y-2 hover:border-teal-400 hover:shadow-teal-400/20"
-          >
-            <div>
-              {/* Image */}
-              <div className="w-full h-48 rounded-xl overflow-hidden mb-5 border border-gray-200">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-
-              {/* Title */}
-              <h2 className="text-xl font-bold text-navy-800 mb-3 text-center" style={{color: '#0a1a4e'}}>
-                {project.title}
-              </h2>
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed mb-4 text-justify" style={{color: '#1e3a8a'}}>
-                {project.description}
-              </p>
-
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.technologies.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="px-2.5 py-1 text-xs rounded-md font-mono"
-                    style={{background: '#e8f0fe', border: '1px solid #93c5fd', color: '#1e3a8a'}}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Action Buttons: GitHub & LinkedIn */}
-            <div className="flex gap-3 pt-4 border-t border-gray-200">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold transition duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white"
-                style={{borderColor: '#1e3a8a', color: '#1e3a8a', background: 'transparent'}}
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-                GitHub
-              </a>
-
-              <a
-                href={project.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold transition duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white"
-                style={{borderColor: '#1d4ed8', background: '#dbeafe', color: '#1e3a8a'}}
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 012.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                LinkedIn
-              </a>
-            </div>
-          </div>
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </section>
