@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
   FaGithub,
   FaFacebookF,
+  FaInstagram,
 } from "react-icons/fa";
 
 /* ─────────────────────────── helpers ─────────────────────────── */
