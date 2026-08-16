@@ -9,6 +9,7 @@ const projectsData = [
     image: "/assets/Projects/digital_Mart.png",
     technologies: ["MERN", "Tailwind CSS"],
     github: "https://github.com/Lalithya-alt/SKYREK_Course_Project.git",
+    Live : "https://skyrek-course-project.vercel.app/",
     linkedin: "https://www.linkedin.com/posts/activity-7491719864051556352-i8gX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEcBl60B4OMP_7jMlvUfBHNHsyc_ng-4d1Y",
   },
   {
@@ -19,6 +20,7 @@ const projectsData = [
     image: "/assets/Projects/client_project.png",
     technologies: ["MERN", "Tailwind CSS"],
     github: "https://github.com/Sadeepa-D/New-Sirini-Hotel-and-Restaurant-Project.git",
+    Live : "https://sirinihotel.vercel.app",
     linkedin: "https://www.linkedin.com/posts/activity-7488151379077656578-FB99?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEcBl60B4OMP_7jMlvUfBHNHsyc_ng-4d1Y",
   },
   {
@@ -100,7 +102,7 @@ function ProjectCard({ project }) {
         </div>
       </div>
 
-      {/* Action Buttons: GitHub & LinkedIn */}
+      {/* Action Buttons: GitHub, Live & LinkedIn */}
       <div className="flex gap-3 pt-4 border-t border-gray-200">
         <a
           href={project.github}
@@ -114,6 +116,21 @@ function ProjectCard({ project }) {
           </svg>
           GitHub
         </a>
+
+        {project.Live && (
+          <a
+            href={project.Live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold transition duration-300 hover:bg-emerald-600 hover:border-emerald-600 hover:text-white"
+            style={{ borderColor: '#059669', background: '#d1fae5', color: '#065f46' }}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            Live
+          </a>
+        )}
 
         <a
           href={project.linkedin}
