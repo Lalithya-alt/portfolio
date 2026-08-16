@@ -49,7 +49,7 @@ export default function About() {
 
           {/* Resume Button */}
           <a
-            href="https://canva.link/cq6uncvpdt557qc"
+            href="https://drive.google.com/file/d/1NNcZMshDxOSr8hgrl-qGc55RZsb8ms8L/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2 rounded-md border-2 border-teal-400 bg-teal-400/20 text-white font-medium hover:bg-teal-400 transition duration-300"
