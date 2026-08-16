@@ -21,9 +21,9 @@ const SOCIAL_LINKS = [
     Icon: FaGithub,
   },
   {
-    label: "Facebook",
-    href: "https://facebook.com/your-profile",
-    Icon: FaFacebookF,
+    label: "Instagram",
+    href: "https://www.instagram.com/lalithya_razi/",
+    Icon: FaInstagram,
   },
 ];
 
